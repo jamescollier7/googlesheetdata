@@ -20,7 +20,7 @@
     doFirstFetch()
   })
   
-  document.getElementById(`reset-config`).addEventListener(`click`, (e)=>{
+  resetConfigBtn.addEventListener(`click`, (e)=>{
     localStorage.clear()
     showElement(configFormEle)
   })

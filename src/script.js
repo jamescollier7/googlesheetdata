@@ -8,9 +8,9 @@
   let sheetId = getFromLocalStorage(SHEET_ID_NAME)
   
   const configFormEle = document.getElementById(`config-form`)
-  const resetConfigBtn = document.getElementById(`config-form`)
+  const resetConfigBtn = document.getElementById(`reset-config`)
 
-  document.querySelector(`form`).addEventListener(`submit`, (e)=>{
+  configFormEle.addEventListener(`submit`, (e)=>{
     e.preventDefault()
     const configForm = e.currentTarget
     setApiKey(configForm.querySelector(`#${API_KEY_NAME}`).value)

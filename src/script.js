@@ -19,6 +19,7 @@
     setSheetId(configForm.querySelector(`#${SHEET_ID_NAME}`).value)
     hideElement(configFormEle)
     showElement(resetConfigBtn)
+    showElement(addRecordFormEle)
     doFirstFetch()
   })
   
@@ -26,6 +27,7 @@
     localStorage.clear()
     showElement(configFormEle)
     hideElement(resetConfigBtn)
+    hideElement(addRecordFormEle)
   })
   
   addRecordFormEle.addEventListener(`click`, (e)=>{
@@ -114,6 +116,7 @@
   if (sheetId && apiKey) {
     doFirstFetch()
     showElement(resetConfigBtn)
+    showElement(addRecordFormEle)
   } else {
     showElement(configFormEle)
   }

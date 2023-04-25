@@ -16,6 +16,7 @@
     setApiKey(configForm.querySelector(`#${API_KEY_NAME}`).value)
     setSheetId(configForm.querySelector(`#${SHEET_ID_NAME}`).value)
     hideElement(configFormEle)
+    showElement(resetConfigBtn)
     doFirstFetch()
   })
   
@@ -63,6 +64,7 @@
   
   if (sheetId && apiKey) {
     doFirstFetch()
+    showElement(resetConfigBtn)
   } else {
     showElement(configFormEle)
   }

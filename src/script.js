@@ -23,7 +23,7 @@
     sheetId = id
   }
   function setApiKey(key) {
-    localStorage.setItem(API_KEY_NAME, id)
+    localStorage.setItem(API_KEY_NAME, key)
     apiKey = key
   }
   function getFromLocalStorage(item) {

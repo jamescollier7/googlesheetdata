@@ -49,8 +49,7 @@
 
     const data = await response.json()
     
-    const cellValue = data?.values?.[0]?.[0]
-    return cellValue
+    return data
   }
   
   function doFirstFetch() {

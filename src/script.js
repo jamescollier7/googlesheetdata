@@ -15,6 +15,7 @@
     apiKey = configForm.querySelector(`#${API_KEY_NAME}`).value
     sheetId = configForm.querySelector(`#${SHEET_ID_NAME}`).value
     hideElement(configFormEle)
+    doFirstFetch()
   })
 
   function setSheetId(id) {
@@ -43,6 +44,10 @@
     return cellValue;
   }
   
+  function doFirstFetch() {
+    fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+  }
+  
   function showElement(ele) {
     ele.classList.remove(`hidden`)
   }
@@ -51,7 +56,7 @@
   }
   
   if (sheetId && apiKey) {
-    fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+    doFirstFetch()
   } else {
     showElement(configFormEle)
   }

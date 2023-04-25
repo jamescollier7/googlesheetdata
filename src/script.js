@@ -23,6 +23,7 @@
   resetConfigBtn.addEventListener(`click`, (e)=>{
     localStorage.clear()
     showElement(configFormEle)
+    hideElement(resetConfigBtn)
   })
 
   function setSheetId(id) {

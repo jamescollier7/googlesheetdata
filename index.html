@@ -30,6 +30,14 @@
         <button class="min-w-full px-5 py-2 mt-5 border-2 border-sky-700 bg-sky-200 hover:bg-sky-700 hover:text-white rounded-full">Submit</button>
       </fieldset>
     </form>
+    <form id="add-record-form" class="hidden flex justify-center self-center border border-gray-200 rounded-lg m-10 p-10 max-w-lg">
+      <fieldset class="flex flex-col items-center gap-5">
+        <label class="min-w-full" title="pipe-delimited (e.g. &quot;hi|hey|yo&quot;">Record (pipe-delimted):
+          <input class="border border-gray-400 rounded-full px-3 min-w-full" type="text" id="addrecord" name="addrecord" required>
+        </label>
+        <button class="min-w-full px-5 py-2 mt-5 border-2 border-emerald-700 bg-emerald-200 hover:bg-emerald-700 hover:text-white rounded-full">Add Record</button>
+      </fieldset>
+    </form>
     <table id="results-table" class="mt-10 border-gray"></table>
     <button id="reset-config" class="hidden absolute top-5 right-5 px-5 py-2 border-2 border-rose-700 bg-rose-200 hover:bg-rose-700 hover:text-white rounded-full">Reset Configs</button>
     <script src="src/script.js"></script>

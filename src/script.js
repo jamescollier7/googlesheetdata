@@ -30,7 +30,7 @@
     hideElement(addRecordFormEle)
   })
   
-  addRecordFormEle.addEventListener(`click`, (e)=>{
+  addRecordFormEle.addEventListener(`submit`, (e)=>{
     e.preventDefault()
     const addRowForm = e.currentTarget
     const addRowInput = addRowForm.querySelector(`#addrecord`)

@@ -10,6 +10,7 @@
   const configFormEle = document.getElementById(`config-form`)
   const resetConfigBtn = document.getElementById(`reset-config`)
   const resultsTableEle = document.getElementById(`results-table`)
+  const addRecordFormEle = document.getElementById(`add-record-form`)
 
   configFormEle.addEventListener(`submit`, (e)=>{
     e.preventDefault()
@@ -22,10 +23,14 @@
   })
   
   resetConfigBtn.addEventListener(`click`, (e)=>{
-    localStorage.clear()
-    showElement(configFormEle)
-    hideElement(resetConfigBtn)
+    e.preventDefault()
+    const addRowForm = e.currentTarget
+    const addRowInput = addRowForm.querySelector(`#${addrecord}`)
+    const cells = addRowInput?.value?.split(`|`)
+    
   })
+  
+  addRecordFormEle.addEventListener(`click`, ()=>{}
 
   function setSheetId(id) {
     localStorage.setItem(SHEET_ID_NAME, id)
@@ -50,6 +55,32 @@
     const data = await response.json()
     
     return data
+  }
+  
+  async function writeDataToSpreadsheet(cells) {
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cellRef}:append?key=${apiKey}&insertDataOption=INSERT_ROWS&valueInputOption=RAW`, {
+      method: "PUT",
+      headers:{
+        'content-type':'application/json'
+      },
+      body: {
+        "range": "A1:C1",
+        "values": [
+          [
+            "32",
+            "33",
+            "34"
+          ]
+        ]
+      }
+    })
+    
+    if (!response.ok) {
+      const message = `An error has occured: ${response.status}`
+      throw new Error(message)
+    }
+    
+    return response
   }
   
   function doFirstFetch() {

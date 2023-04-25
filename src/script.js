@@ -7,6 +7,7 @@
   let apiKey = getFromLocalStorage(API_KEY_NAME)
 
   document.querySelector(`form`).addEventListener(`submit`, (e)=>{
+    e.preventDefault()
     console.log(e)
   })
 
@@ -36,5 +37,7 @@
     return cellValue;
   }
   
-  fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+  if (sheetId && apiKey) {
+    fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+  }
 })()

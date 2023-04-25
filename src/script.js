@@ -23,14 +23,18 @@
   })
   
   resetConfigBtn.addEventListener(`click`, (e)=>{
+    localStorage.clear()
+    showElement(configFormEle)
+    hideElement(resetConfigBtn)
+  })
+  
+  addRecordFormEle.addEventListener(`click`, (e)=>{
     e.preventDefault()
     const addRowForm = e.currentTarget
     const addRowInput = addRowForm.querySelector(`#${addrecord}`)
     const cells = addRowInput?.value?.split(`|`)
-    
+    writeDataToSpreadsheet(cells)
   })
-  
-  addRecordFormEle.addEventListener(`click`, ()=>{}
 
   function setSheetId(id) {
     localStorage.setItem(SHEET_ID_NAME, id)

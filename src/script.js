@@ -8,6 +8,7 @@
   let sheetId = getFromLocalStorage(SHEET_ID_NAME)
   
   const configFormEle = document.getElementById(`config-form`)
+  const resetConfigBtn = document.getElementById(`config-form`)
 
   document.querySelector(`form`).addEventListener(`submit`, (e)=>{
     e.preventDefault()
@@ -16,6 +17,11 @@
     setSheetId(configForm.querySelector(`#${SHEET_ID_NAME}`).value)
     hideElement(configFormEle)
     doFirstFetch()
+  })
+  
+  document.getElementById(`reset-config`).addEventListener(`click`, (e)=>{
+    localStorage.clear()
+    showElement(configFormEle)
   })
 
   function setSheetId(id) {
@@ -41,7 +47,7 @@
     const data = await response.json()
     
     const cellValue = data?.values?.[0]?.[0]
-    return cellValue;
+    return cellValue
   }
   
   function doFirstFetch() {

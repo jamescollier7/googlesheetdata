@@ -12,8 +12,8 @@
   document.querySelector(`form`).addEventListener(`submit`, (e)=>{
     e.preventDefault()
     const configForm = e.currentTarget
-    apiKey = configForm.querySelector(`#${API_KEY_NAME}`).value
-    sheetId = configForm.querySelector(`#${SHEET_ID_NAME}`).value
+    setApiKey(configForm.querySelector(`#${API_KEY_NAME}`).value)
+    setSheetId(configForm.querySelector(`#${SHEET_ID_NAME}`).value)
     hideElement(configFormEle)
     doFirstFetch()
   })

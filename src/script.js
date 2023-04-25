@@ -64,7 +64,7 @@
   }
   
   async function writeDataToSpreadsheet(cells) {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cellRef}:append?key=${apiKey}&insertDataOption=INSERT_ROWS&valueInputOption=RAW`, {
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1%AD5:append?key=${apiKey}&insertDataOption=INSERT_ROWS&valueInputOption=RAW`, {
       method: "PUT",
       headers:{
         'content-type':'application/json'

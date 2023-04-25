@@ -21,11 +21,15 @@
     </h1>
     <h2 class="text-center text-lg">A simple way to use Google Sheets as a database</h2>
     <form class="border border-gray-400 rounded-lg m-10 p-10">
-      <label for="apikey">API Key:</label><br>
-      <input class="border border-gray-400 rounded-full" type="text" id="apikey" name="apikey"><br>
-      <label for="sheetid">Sheet ID:</label><br>
-      <input class="border border-gray-400 rounded-full" type="text" id="sheetid" name="sheetid"><br><br>
-      <button class="px-5 py-2 bg-sky-300 rounded-full">Submit</button>
+      <fieldset>
+        <label>API Key:
+          <input class="border border-gray-400 rounded-full" type="text" id="apikey" name="apikey">
+        </label>
+        <label>Sheet ID:
+          <input class="border border-gray-400 rounded-full" type="text" id="sheetid" name="sheetid">
+        </label>
+        <button class="px-5 py-2 bg-sky-300 rounded-full">Submit</button>
+      </fieldset>
     </form>
     <script src="src/script.js"></script>
   </body>

@@ -39,7 +39,7 @@
   }
   
   async function fetchCellData(cell) {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheet}/values/Sheet1!${cell}?key=${apiKey}`)
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cell}?key=${apiKey}`)
     
     if (!response.ok) {
       const message = `An error has occured: ${response.status}`

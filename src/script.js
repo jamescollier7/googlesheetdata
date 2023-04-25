@@ -31,7 +31,7 @@
   addRecordFormEle.addEventListener(`click`, (e)=>{
     e.preventDefault()
     const addRowForm = e.currentTarget
-    const addRowInput = addRowForm.querySelector(`#${addrecord}`)
+    const addRowInput = addRowForm.querySelector(`#addrecord`)
     const cells = addRowInput?.value?.split(`|`)
     writeDataToSpreadsheet(cells)
   })

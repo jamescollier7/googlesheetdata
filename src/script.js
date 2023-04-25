@@ -95,9 +95,9 @@
     resultsTableEle.innerHTML = ``
     
     data?.values?.forEach((row)=>{
-      let rowdata = `<tr class="border-gray">`
+      let rowdata = `<tr class="border border-gray">`
       row.forEach((cell)=>{
-        rowdata += `<td class="border-gray">${cell}</td>`
+        rowdata += `<td class="border border-gray text-center">${cell}</td>`
       })
       rowdata += `</tr>`
       resultsTableEle.innerHTML += rowdata

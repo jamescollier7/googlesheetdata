@@ -1,8 +1,8 @@
 (()=>{
   'use strict';
   
-  const API_KEY_NAME = `apiKey`
-  const SHEET_ID_NAME = `sheetId`
+  const API_KEY_NAME = `apikey`
+  const SHEET_ID_NAME = `sheetid`
  
   let apiKey = getFromLocalStorage(API_KEY_NAME)
   let sheetId = getFromLocalStorage(SHEET_ID_NAME)

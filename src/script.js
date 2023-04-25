@@ -9,6 +9,7 @@
   
   const configFormEle = document.getElementById(`config-form`)
   const resetConfigBtn = document.getElementById(`reset-config`)
+  const resultsTableEle = document.getElementById(`results-table`)
 
   configFormEle.addEventListener(`submit`, (e)=>{
     e.preventDefault()
@@ -38,8 +39,8 @@
     return localStorage.getItem(item)
   }
   
-  async function fetchCellData(cell) {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cell}?key=${apiKey}`)
+  async function fetchDataFromTheSpreadsheet(cellRef) {
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cellRef}?key=${apiKey}`)
     
     if (!response.ok) {
       const message = `An error has occured: ${response.status}`
@@ -53,7 +54,20 @@
   }
   
   function doFirstFetch() {
-    fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+    fetchDataFromTheSpreadsheet(`A1:D5`).then(data => writeOutTable(data))
+  }
+  
+  function writeOutTable(data) {
+    resultsTableEle.innerHTML = ``
+    
+    data?.values?.forEach((row)=>{
+      let rowdata = `<tr>`
+      row.forEach((cell)=>{
+        rowdata += `<td>${cell}</td>`
+      })
+      rowdata += `</tr>`
+      resultsTableEle.innerHTML += rowdata
+    })
   }
   
   function showElement(ele) {

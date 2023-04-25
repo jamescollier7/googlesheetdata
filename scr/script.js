@@ -6,6 +6,10 @@
   let sheetId = getFromLocalStorage(SHEET_ID_NAME)
   let apiKey = getFromLocalStorage(API_KEY_NAME)
 
+  document.querySelector(`form`).addEventListener(`submit`, (e)=>{
+    console.log(e)
+  })
+
   function setSheetId(id) {
     localStorage.setItem(SHEET_ID_NAME, id)
     sheetId = id

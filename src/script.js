@@ -1,17 +1,20 @@
 (()=>{
   'use strict';
   
-  const SHEET_ID_NAME = `sheetId`
   const API_KEY_NAME = `apiKey`
-  let sheetId = getFromLocalStorage(SHEET_ID_NAME)
+  const SHEET_ID_NAME = `sheetId`
+ 
   let apiKey = getFromLocalStorage(API_KEY_NAME)
+  let sheetId = getFromLocalStorage(SHEET_ID_NAME)
   
   const configFormEle = document.getElementById(`config-form`)
 
   document.querySelector(`form`).addEventListener(`submit`, (e)=>{
     e.preventDefault()
+    const configForm = e.currentTarget
+    apiKey = configForm.querySelector(`#${API_KEY_NAME}`).value
+    sheetId = configForm.querySelector(`#${SHEET_ID_NAME}`).value
     hideElement(configFormEle)
-    console.log(e)
   })
 
   function setSheetId(id) {

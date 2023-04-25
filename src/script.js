@@ -5,9 +5,12 @@
   const API_KEY_NAME = `apiKey`
   let sheetId = getFromLocalStorage(SHEET_ID_NAME)
   let apiKey = getFromLocalStorage(API_KEY_NAME)
+  
+  const configFormEle = document.getElementById(`config-form`)
 
   document.querySelector(`form`).addEventListener(`submit`, (e)=>{
     e.preventDefault()
+    hideElement(configFormEle)
     console.log(e)
   })
 
@@ -37,7 +40,16 @@
     return cellValue;
   }
   
+  function showElement(ele) {
+    ele.classList.remove(`hidden`)
+  }
+  function hideElement(ele) {
+    ele.classList.add(`hidden`)
+  }
+  
   if (sheetId && apiKey) {
     fetchCellData(`A1`).then(cellValue => console.log(cellValue))
+  } else {
+    showElement(configFormEle)
   }
 })()

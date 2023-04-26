@@ -95,7 +95,7 @@ var gapiLoaded = (()=>{
       return;
     }
     
-    return data
+    return range.values
   }
   
   async function writeDataToSpreadsheet(cells) {

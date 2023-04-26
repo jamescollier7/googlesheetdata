@@ -79,7 +79,6 @@ var gapiLoaded = (()=>{
   async function fetchDataFromTheSpreadsheet(cellRef) {
     let response
     try {
-      // Fetch first 10 files
       response = await gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: sheetId,
         range: `Sheet1!${cellRef}`,
@@ -92,36 +91,29 @@ var gapiLoaded = (()=>{
     const range = response.result
     if (!range || !range.values || range.values.length == 0) {
       console.warn('No values found.')
-      return;
+      return
     }
     
     return range
   }
   
   async function writeDataToSpreadsheet(cells) {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1%AD5:append?key=${apiKey}&insertDataOption=INSERT_ROWS&valueInputOption=RAW`, {
-      method: "POST",
-      headers:{
-        'content-type':'application/json'
-      },
-      body: {
-        "range": "A1:C1",
-        "values": [
-          [
-            "32",
-            "33",
-            "34"
-          ]
-        ]
-      }
-    })
-    
-    if (!response.ok) {
-      const message = `An error has occured: ${response.status}`
-      throw new Error(message)
+    var params = {
+      spreadsheetId: sheetId,
+      range: 'A1:D1',
+      valueInputOption: 'RAW',
+      insertDataOption: 'INSERT_ROWS',
     }
-    
-    return response
+
+    let result
+    var request = gapi.client.sheets.spreadsheets.values.append(params, cells)
+      .then(function(response) {
+        result = response.result
+      }, function(reason) {
+        console.error('error: ' + reason.result.error.message)
+      })
+
+    return result
   }
   
   function doFirstFetch() {

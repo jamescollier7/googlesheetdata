@@ -11,6 +11,33 @@
   const resetConfigBtn = document.getElementById(`reset-config`)
   const resultsTableEle = document.getElementById(`results-table`)
   const addRecordFormEle = document.getElementById(`add-record-form`)
+  
+  // Discovery doc URL for APIs used by the quickstart
+  const DISCOVERY_DOC = `https://sheets.googleapis.com/$discovery/rest?version=v4`
+
+  /**
+   * Callback after api.js is loaded.
+   */
+  function gapiLoaded() {
+    if (sheetId && apiKey) {
+      gapi.load('client', initializeGapiClient)
+    } else {
+      showElement(configFormEle)
+    }
+  }
+
+  /**
+  * Callback after the API client is loaded. Loads the discovery doc to initialize the API.
+  */
+  async function initializeGapiClient() {
+    await gapi.client.init({
+      apiKey: apiKey,
+      discoveryDocs: [DISCOVERY_DOC],
+    });
+    showElement(resetConfigBtn)
+    showElement(addRecordFormEle)
+    doFirstFetch()
+  }
 
   configFormEle.addEventListener(`submit`, (e)=>{
     e.preventDefault()
@@ -18,9 +45,7 @@
     setApiKey(configForm.querySelector(`#${API_KEY_NAME}`).value)
     setSheetId(configForm.querySelector(`#${SHEET_ID_NAME}`).value)
     hideElement(configFormEle)
-    showElement(resetConfigBtn)
-    showElement(addRecordFormEle)
-    doFirstFetch()
+    gapi.load('client', initializeGapiClient);
   })
   
   resetConfigBtn.addEventListener(`click`, (e)=>{
@@ -28,6 +53,7 @@
     showElement(configFormEle)
     hideElement(resetConfigBtn)
     hideElement(addRecordFormEle)
+    window.location.reload()
   })
   
   addRecordFormEle.addEventListener(`submit`, (e)=>{
@@ -51,21 +77,30 @@
   }
   
   async function fetchDataFromTheSpreadsheet(cellRef) {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!${cellRef}?key=${apiKey}`)
-    
-    if (!response.ok) {
-      const message = `An error has occured: ${response.status}`
-      throw new Error(message)
+    let response
+    try {
+      // Fetch first 10 files
+      response = await gapi.client.sheets.spreadsheets.values.get({
+        spreadsheetId: sheetId,
+        range: `Sheet1!${cellRef}`,
+      })
+    } catch (err) {
+      console.error(err)
+      return
     }
-
-    const data = await response.json()
+    
+    const range = response.result
+    if (!range || !range.values || range.values.length == 0) {
+      console.warn('No values found.')
+      return;
+    }
     
     return data
   }
   
   async function writeDataToSpreadsheet(cells) {
     const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1%AD5:append?key=${apiKey}&insertDataOption=INSERT_ROWS&valueInputOption=RAW`, {
-      method: "PUT",
+      method: "POST",
       headers:{
         'content-type':'application/json'
       },
@@ -113,11 +148,4 @@
     ele.classList.add(`hidden`)
   }
   
-  if (sheetId && apiKey) {
-    doFirstFetch()
-    showElement(resetConfigBtn)
-    showElement(addRecordFormEle)
-  } else {
-    showElement(configFormEle)
-  }
 })()

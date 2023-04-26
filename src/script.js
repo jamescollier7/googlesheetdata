@@ -1,4 +1,4 @@
-(()=>{
+var gapiLoaded = (()=>{
   'use strict';
   
   const API_KEY_NAME = `apikey`
@@ -147,5 +147,7 @@
   function hideElement(ele) {
     ele.classList.add(`hidden`)
   }
+  
+  return gapiLoaded
   
 })()
